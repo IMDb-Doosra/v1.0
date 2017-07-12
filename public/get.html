@@ -103,6 +103,16 @@
             display: block;
             margin: 0 auto;
         }
+        
+        #searchR {
+            width: 900px;
+            background-color: white;
+            margin-top: 50px;
+            padding: 10px;
+            border: 2px solid black;
+            display: none;
+            border-radius: 20px;
+        }
 
     </style>
 </head>
@@ -111,10 +121,15 @@
     <div id="container">
         <div class="center" style="width: fit-content;">Get Movie Details
             <br>
-            <input type="text" id="mname" autofocus>
+            <input type="text" id="mname" autofocus value="man">
             <button id="search"><b>Find</b></button>
         </div>
-        <div id="searchR" class="center" style="width:900px;margin-top:50px; padding:10px; border: 1px solid black; display:none; border-radius:20px;"></div>
+
+
+
+
+
+        <div id="searchR" class="center"></div>
     </div>
     <!--
     <br> rating

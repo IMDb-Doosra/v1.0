@@ -2,6 +2,20 @@
             /* setInterval(function () {
                  $("#rated").empty().html($("#rating").val());
              }, 4);*/
+
+            $("#sbar input").on('blur', function () {
+
+
+
+                $('#searchR').css("display", "none");
+
+
+            });
+            $("#sbar input").on('focus', function () {
+                $('#searchR').css("display", "visible");
+            });
+
+
             $("#search").click(function () {
                 var mname = add($("#mname").val());
                 var url = 'http://www.omdbapi.com/?apikey=ec6483bd&s=' + mname;
