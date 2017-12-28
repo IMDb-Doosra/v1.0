@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> RTM |
+        <%=data.Title%>
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nova+Oval|Source+Sans+Pro|Asap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        body {
+            overflow: hidden;
+        }
+        
+        #container {
+            top: 0%;
+            z-index: -1;
+            overflow: hidden;
+            background: url(images/ratethismovie.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            filter: grayscale(1%) blur(10px);
+            display: block;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .title {
+            color: #eee;
+            text-shadow: 0px 0px 10px black;
+            width: fit-content;
+            align-self: center;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            padding: 20px 50px;
+            margin-bottom: 0.5em;
+            background: linear-gradient(180deg, #999, #555, #444, #333, #000);
+        }
+        
+        figure {
+            left: -1%;
+            position: fixed;
+            background-color: #16a085;
+            margin-top: 1em;
+            ;
+            width: 25%;
+            height: 450px;
+            overflow: hidden;
+            display: inline-block;
+            border-radius: 0px 20px 20px 0px;
+        }
+        
+        figure img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .info table {
+            /*border: 1px solid black;*/
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .info table tr {
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+        }
+        
+        .info span {
+            color: white;
+            font-weight: 300;
+        }
+        
+        .info {
+            background: linear-gradient(300deg, #05A2E7, #31b3ab);
+            overflow-y: scroll;
+            display: inline-block;
+            width: 70%;
+            overflow-x: hidden;
+            text-align: left;
+            position: absolute;
+            right: -1.2%;
+            border-radius: 15px 0px 0px 15px;
+            font-weight: 400;
+            color: black;
+            max-height: 80%;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        #cR {
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            z-index: 5;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            /*
+ display: none;*/
+        }
+        
+        input[type='radio']:after {
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            border: 5px solid green;
+            top: -5px;
+            left: -8px;
+            position: relative;
+            background-color: #d1d3d1;
+            content: '';
+            opacity: 0;
+            display: inline-block;
+            visibility: visible;
+            transition: 0.1s;
+        }
+        
+        .rad input {
+            margin: 10px;
+        }
+        
+        input[type='radio']:checked:after {
+            transition: 0.1s;
+            opacity: 1;
+            height: 15px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: #ffa500;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 1px solid white;
+        }
+        
+        #num span {
+            margin: 20px 10px;
+            padding: 20px 6px;
+        }
+        
+        .des {
+            padding-top: 15px;
+        }
+        
+        .btn {
+            padding: 0.5em 0.3em;
+            border: none;
+            width: 8rem;
+            border-radius: 1rem;
+        }
+        
+        .btn:hover {}
+        
+        #home {
+            top: 6%;
+            right: 6%;
+            background-color: black;
+            position: absolute;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid black;
+            height: 1.3em;
+            width: 1.3em;
+            display: inline-block;
+        }
+        
+        .right {
+            position: absolute;
+            right: 7px;
+        }
+        
+        #home a {
+            padding: 7px;
+            padding-left: 5px;
+            background-color: #333;
+            color: aliceblue;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        function rateMovie() {
+            var rating = document.querySelector('input[name="rating"]:checked').value;
+            var id = '<%=data.imdbID%>';
+            var obj = {
+                rating: rating
+                , mid: id
+                , mname: '<%=data.Title%>'
+            }
+            console.dir(obj);
+            $.post('/rate', obj).done(function (data) {
+                if (data.loggedIn) {
+                    alert(data.message);
+                }
+                else {
+                    location.href = '/login';
+                }
+            }).fail(function (error) {
+                alert("Problem connecting to Server!!");
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div>
+        <div class="title">
+            <div>
+                <h1><%=data.Title%></h1></div>
+            <div id="home" class="right" style=""><a href="/" class="text-white btn"><i class="fa fa-home" aria-hidden="true"></i></a></div>
+        </div>
+        <figure> <img src="<%=data.Poster%>" class="center" alt="Poster not available"> </figure>
+        <div class="info">
+            <table>
+                <tr>
+                    <td>Runtime : <span> <%=data.Runtime%></span> </td>
+                    <td>Rated : <span> <%=data.Rated%></span> </td>
+                    <td>Released : <span> <%=data.Released%></span> </td>
+                </tr>
+                <tr>
+                    <td colspan='3'>Director : <span> <%=data.Director%></span> </td>
+                </tr>
+                <tr>
+                    <td colspan='3'>Actor : <span> <%=data.Actors%></span></td>
+                </tr>
+                <tr>
+                    <td colspan='3'>Awards : <span> <%=data.Awards%></span></td>
+                </tr>
+                <tr>
+                    <td colspan='3' class="des">Plot
+                        <br>
+                        <p> <span> <%=data.Plot%>
+                        </span> </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td> IMDb Rating : <span><%=data.Ratings[0].Value%></span> </td>
+                </tr>
+                <tr>
+                    <%if(rtmRating[0].rtmRating){%>
+                        <td colspan='3'> RTM Rating : <span><%=rtmRating[0].rtmRating%>/5</span> </td>
+                        <%}%>
+                            <%if(!rtmRating[0].rtmRating){%>
+                                <td colspan='3'> RTM Rating : <span>N/A</span> </td>
+                                <%}%>
+                </tr>
+            </table>
+            <hr style="width:80%; border:none; border-top:1px solid black; margin:auto;">
+            <table id="rate" class="center">
+                <tr>
+                    <td> RATE THIS Movie / Series </td>
+                </tr>
+                <tr>
+                    <td id="rated"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="rad">
+                            <input type="radio" name="rating" value="0">
+                            <!--<span>0</span>-->
+                            <input type="radio" name="rating" value="1">
+                            <!--<span>1</span>-->
+                            <input type="radio" name="rating" value="2">
+                            <!--<span>2</span>-->
+                            <input type="radio" name="rating" value="3" checked>
+                            <!--<span>3</span>-->
+                            <input type="radio" name="rating" value="4">
+                            <!--<span>4</span>-->
+                            <input type="radio" name="rating" value="5">
+                            <!--<span>5</span>--></div>
+                        <div id="num"> <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span> </div>
+                        <br>
+                        <button id="mainclick" onclick="rateMovie()" class="center btn">Rate</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

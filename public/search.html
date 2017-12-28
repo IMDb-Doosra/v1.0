@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rate Movies</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            /* setInterval(function () {
+                 $("#rated").empty().html($("#rating").val());
+             }, 4);*/
+            $("#search").click(function () {
+                var mname = add($("#mname").val());
+                var url = 'http://www.omdbapi.com/?apikey=ec6483bd&s=' + mname;
+                $.get(url).done(function (data) {
+                    document.getElementById("searchR").style.display = "block";
+                    var str = "";
+                    if (data.Response === 'False') {
+                        console.log(data.Response);
+                        str += "<h1>Item not found</h1>";
+                    }
+                    else {
+                        //console.log(data);
+                        for (var i = 0; i < Math.min(data.Search.length, 8); i++) {
+                            str += "<div onclick=\"getmovie('" + data.Search[i].Title + "')\" class=\"outline\" style=\"display:inline-flex; width:90%;\"> <img src=\"" + data.Search[i].Poster + "\" alt=\"\"> <div style=\"padding:1rem;\"><div name=\"title\"><h1>" + data.Search[i].Title + "</h1></div><div name=\"year\"><h2>" + data.Search[i].Year + " </h2></div><div name=\"type\">" + firstCap(data.Search[i].Type) + "</div> </div> </div>";
+                            str += "<br><br>";
+                        }
+                        console.log(data.Response);
+                    }
+                    $("#searchR").empty().html(str);
+                    console.log(data);
+                }).fail(function (error) {
+                    console.log("ajax result", error);
+                });
+            });
+            $('#mname').keyup(function () {
+                if (event.keyCode == 13) {
+                    $('#search').click();
+                }
+                else {
+                    return false
+                }
+            });
+        });
+
+        function add(mname) {
+            for (i = 0; i < mname.length; i++) {
+                if (mname[i] == ' ') {
+                    mname = mname.replace(' ', '+');
+                }
+            }
+            return mname;
+        }
+
+        function firstCap(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function getmovie(name) {
+            console.log("clicked ", name);
+            var mname = add(name);
+            var url = 'http://www.omdbapi.com/?apikey=ec6483bd&plot=full&t=' + mname;
+            console.log("called ", url);
+            $.get(url).done(function (data) {
+                document.getElementById("searchR").style.display = "block";
+                var str = "";
+                if (data.Response === 'False') {
+                    console.log(data.Response);
+                    str += "<h1>Item not found</h1>";
+                }
+                else {
+                    /*for (var key in data) { str += "[" + key + "] : " + data[key] + "
+                    <br>"; }*/
+                    str += "<button onclick=\"goback()\">back</button>";
+                    str += "<h1 style=\"text-align:center\">" + data.Title + "</h1><br>";
+                    str += "<h3 style=\"text-align:center\">" + data.Runtime + "</h3><br>";
+                    str += "<img src=\"" + data.Poster + "\" class=\"center\" alt=\"Poster not available\"><br>";
+                    str += "<h3 style=\"text-align:center\"> Rated : " + data.Rated + "</h3><br>";
+                    str += "<h3 style=\"text-align:center\"> Director - " + data.Director + "</h3><br>";
+                    str += "<h4 style=\"text-align:center\"> Actors - " + data.Actors + "</h4><br>";
+                    str += "<h4 style=\"text-align:center\"> Awards - " + data.Awards + "</h4><br>";
+                    str += data.Plot;
+                    console.log(data.Response);
+                }
+                $("#searchR").empty().html(str);
+                console.log(data);
+            }).fail(function (error) {
+                console.log("ajax result", error);
+            });
+        }
+
+        function goback() {
+            $("#search").click();
+        }
+    </script>
+    <style>
+        #rating {
+            width: 500px;
+        }
+        
+        body {
+            background: linear-gradient(200deg, #004340, #ad9d8a);
+        }
+        
+        #mname {
+            border-radius: 3rem;
+            border: none;
+            background: linear-gradient(48deg, #004340, #ad9d8a);
+            width: 30rem;
+            height: 3rem;
+            color: white;
+            padding: 0.2rem;
+            padding-left: 0.5rem;
+            font-size: 1.6rem;
+        }
+        
+        #search {
+            border-radius: 3rem;
+            border: none;
+            background: #2d7dce;
+            width: 3rem;
+            height: 3rem;
+            color: white;
+        }
+        
+        .center {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .outline {
+            margin-top: 50px;
+            padding: 10px;
+            border: 1px solid black;
+            display: none;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center" style="width: fit-content;">Search movie
+        <br>
+        <input type="text" id="mname" autofocus>
+        <button id="search"><b>Find</b></button>
+    </div>
+    <div id="searchR" class="center outline" style="width:800px;"></div>
+    <!--
+    <br> rating
+<br>
+<div id="rated"></div>
+<br>
+<input type="range" min="1" max="10" step="0.1" id="rating">
+--><a href="get.html">Go to set movie details</a> </body>
+
+</html>
