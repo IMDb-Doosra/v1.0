@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>RTM | Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -17,6 +18,11 @@
             font-size: 0.9rem;
         }
         
+=======
+    <title>IMDb Doosra | Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         button.btn-imdb {
             background: linear-gradient(#f7e0a8, #EEBA35);
             border: 1px #A88734 solid;
@@ -24,11 +30,14 @@
             display: block!important;
         }
         
+<<<<<<< HEAD
         .center {
             display: block;
             margin: auto;
         }
         
+=======
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         button.btn-imdb:hover {
             background: linear-gradient(#F5D689, #EEBA35);
         }
@@ -42,6 +51,7 @@
             border-color: #E77600;
         }
         
+<<<<<<< HEAD
         #form {
             border: 1px solid #DDDDDD;
             padding: 2rem;
@@ -52,6 +62,55 @@
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
             background: linear-gradient(40deg, #898989, #565656);
             color: #eee;
+=======
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            color: white;
+        }
+        
+        #container {
+            /*
+ background: url("images/marvel_universe_initiative_-_h_-_2016.jpg");*/
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        
+        #form {
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0px 0px 20px black;
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            margin: 10% auto;
+        }
+        
+        #form table {
+            width: 100%;
+        }
+        
+        #form table thead tr {
+            color: green;
+            text-align: center;
+        }
+        
+        #form td {
+            padding: 0.5em;
+        }
+        
+        #form tr {
+            margin-bottom: 10px;
+        }
+        
+        #login {
+            color: #333;
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         }
         
         #home {
@@ -67,6 +126,7 @@
             display: inline-block;
         }
         
+<<<<<<< HEAD
         .right {
             position: absolute;
             right: 5px;
@@ -106,3 +166,84 @@
 </body>
 
 </html>
+=======
+        #home a {
+            padding: 6px;
+            background-color: black;
+        }
+        
+        .right {
+            text-align: right;
+        }
+        
+        #new {
+            border: 1px solid #3368b7;
+            margin: 0 auto!important;
+            display: block!important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="home"><a href="index.html" class="text-white btn btn-primary"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></div>
+
+        <div class="alert" style="display:none;">ERROR DIV</div>
+        <form action="/login" method="post" id="form">
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2">
+                            <h1 class="pb-2" style="font-weight:normal!important">Sign In</h1>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="email" class="row pl-3"><b>Email</b></label>
+                        </td>
+                        <td>
+                            <input type="email" name="email" id="email" class="form-control stylize-input" autofocus>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <label for="pass" class="row pl-3"><b>Password </b></label>
+
+                        </td>
+                        <td>
+
+                            <input type="password" name="pass" id="pass" class="form-control stylize-input">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br>
+                            <button id="login" type="submit" class="btn btn-imdb col-lg-12">Login</button>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="right">
+                            <br><a href="/forgotpass" style="color:#0066c0; font-size:0.9em;">Forgot Password?</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <a href="register" class="btn btn-outline-info" id="new">New to IMDb Doosra?</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec

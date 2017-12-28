@@ -15,6 +15,10 @@
             $("#search").click(function () {
                 var mname = add($("#mname").val());
                 var url = 'http://www.omdbapi.com/?apikey=ec6483bd&s=' + mname;
+<<<<<<< HEAD
+=======
+                console.log("called ", url);
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
                 $.get(url).done(function (data) {
                     document.getElementById("searchR").style.display = "block";
                     var str = "";
@@ -24,8 +28,13 @@
                     }
                     else {
                         //console.log(data);
+<<<<<<< HEAD
                         for (var i = 0; i < Math.min(data.Search.length, 8); i++) {
                             str += "<div onclick=\"getmovie('" + data.Search[i].Title + "')\" class=\"outline\" style=\"display:inline-flex; width:90%;\"> <img src=\"" + data.Search[i].Poster + "\" alt=\"\"> <div style=\"padding:1rem;\"><div name=\"title\"><h1>" + data.Search[i].Title + "</h1></div><div name=\"year\"><h2>" + data.Search[i].Year + " </h2></div><div name=\"type\">" + firstCap(data.Search[i].Type) + "</div> </div> </div>";
+=======
+                        for (var i = 0; i < data.Search.length; i++) {
+                            str += "<div class=\"outline\" style=\"display:inline-flex; width:90%;\"> <img src=\"" + data.Search[i].Poster + "\" alt=\"\"> <div style=\"padding:1rem;\"><div name=\"title\"><h1>" + data.Search[i].Title + "</h1></div><div name=\"year\"><h2>" + data.Search[i].Year + " </h2></div><div name=\"type\">" + firstCap(data.Search[i].Type) + "</div> </div> </div>";
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
                             str += "<br><br>";
                         }
                         console.log(data.Response);
@@ -58,6 +67,7 @@
         function firstCap(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
+<<<<<<< HEAD
 
         function getmovie(name) {
             console.log("clicked ", name);
@@ -95,6 +105,8 @@
         function goback() {
             $("#search").click();
         }
+=======
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     </script>
     <style>
         #rating {

@@ -8,19 +8,35 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+<<<<<<< HEAD
         $(document).ready(function () {
             $("#search").click(function () {
                 var mname = add($("#mname").val());
                 var url = 'http://www.omdbapi.com/?apikey=ec6483bd&plot=full&t=' + mname;
                 console.log("called ", url);
                 $.get(url).done(function (data) {
+=======
+        $(document).ready(function() {
+            /* setInterval(function () {
+                 $("#rated").empty().html($("#rating").val());
+             }, 4);*/
+            $("#search").click(function() {
+                var mname = add($("#mname").val());
+                var url = 'http://www.omdbapi.com/?apikey=ec6483bd&plot=full&t=' + mname;
+                console.log("called ", url);
+                $.get(url).done(function(data) {
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
                     document.getElementById("searchR").style.display = "block";
                     var str = "";
                     if (data.Response === 'False') {
                         console.log(data.Response);
                         str += "<h1>Item not found</h1>";
+<<<<<<< HEAD
                     }
                     else {
+=======
+                    } else {
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
                         /*for (var key in data) { str += "[" + key + "] : " + data[key] + "
                         <br>"; }*/
                         str += "<h1 style=\"text-align:center\">" + data.Title + "</h1><br>";
@@ -35,6 +51,7 @@
                     }
                     $("#searchR").empty().html(str);
                     console.log(data);
+<<<<<<< HEAD
                 }).fail(function (error) {
                     console.log("ajax result", error);
                 });
@@ -44,6 +61,16 @@
                     $('#search').click();
                 }
                 else {
+=======
+                }).fail(function(error) {
+                    console.log("ajax result", error);
+                });
+            });
+            $('#mname').keyup(function() {
+                if (event.keyCode == 13) {
+                    $('#search').click();
+                } else {
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
                     return false
                 }
             });
@@ -57,13 +84,32 @@
             }
             return mname;
         }
+<<<<<<< HEAD
     </script>
     <style>
+=======
+
+    </script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         #rating {
             width: 500px;
         }
         
+<<<<<<< HEAD
         body {
+=======
+        #container {
+            position: absolute;
+            overflow: scroll;
+            width: 100%;
+            height: 100%;
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
             background: linear-gradient(228deg, #004340, #ad9d8a);
         }
         
@@ -92,16 +138,46 @@
             display: block;
             margin: 0 auto;
         }
+<<<<<<< HEAD
+=======
+        
+        #searchR {
+            width: 900px;
+            background-color: white;
+            margin-top: 50px;
+            padding: 10px;
+            border: 2px solid black;
+            display: none;
+            border-radius: 20px;
+        }
+
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     </style>
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="center" style="width: fit-content;">Get Movie Details
         <br>
         <input type="text" id="mname" autofocus>
         <button id="search"><b>Find</b></button>
     </div>
     <div id="searchR" class="center" style="width:900px;margin-top:50px; padding:10px; border: 1px solid black; display:none; border-radius:20px;"></div>
+=======
+    <div id="container">
+        <div class="center" style="width: fit-content;">Get Movie Details
+            <br>
+            <input type="text" id="mname" autofocus value="man">
+            <button id="search"><b>Find</b></button>
+        </div>
+
+
+
+
+
+        <div id="searchR" class="center"></div>
+    </div>
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     <!--
     <br> rating
 <br>
@@ -111,4 +187,8 @@
 -->
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec

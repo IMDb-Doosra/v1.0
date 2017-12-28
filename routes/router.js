@@ -1,18 +1,28 @@
 const express = require('express');
 var router = express.Router();
 var path = require('path');
+<<<<<<< HEAD
 //
 router.get('/', (req, res) => {
     console.log("home pe session: ", req.session);
+=======
+var bcrypt = require('bcryptjs');
+//
+router.get('/', (req, res) => {
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     res.sendFile(path.join(__dirname, '/../public/index.html'));
 });
 //
 router.get('/login', (req, res) => {
+<<<<<<< HEAD
     if (req.session.userid) {
         res.redirect('/logs');
     } else {
         res.sendFile(path.join(__dirname, '/../public/login.html'));
     }
+=======
+    res.sendFile(path.join(__dirname, '/../public/login.html'));
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
 });
 //
 router.get('/register', (req, res) => {
@@ -22,6 +32,7 @@ router.get('/register', (req, res) => {
 //
 router.post('/login', function (req, res) {
     var user = {
+<<<<<<< HEAD
         email: req.body.email,
         pass: req.body.pass
     };
@@ -31,12 +42,24 @@ router.post('/login', function (req, res) {
         user: 'root',
         password: 'aakash',
         database: 'imdb2'
+=======
+        email: req.body.email
+        , pass: req.body.pass
+    };
+    var mysql = require('mysql');
+    var connection = mysql.createConnection({
+        host: 'localhost'
+        , user: 'root'
+        , password: 'aakash'
+        , database: 'imdb2'
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     });
     var loginUser = 'SELECT * FROM user WHERE email="' + user.email + '" AND pass="' + user.pass + '";';
     try {
         connection.query(loginUser, function (err, data) {
             var msg = '';
             if (err) {
+<<<<<<< HEAD
                 msg = 'Error connecting..';
                 res.render('error', {
                     message: msg,
@@ -72,23 +95,57 @@ router.post('/login', function (req, res) {
                 link: '/'
             }
         });
+=======
+                msg = 'Error';
+                res.send(msg);
+            }
+            else {
+                if (data.length) {
+                    //msg = 'Logged in as ' + data[0].name;
+                    res.render('profile', {
+                        name: data[0].name
+                    });
+                }
+                else {
+                    msg = 'Invalid Email or Password!!';
+                    res.send(msg);
+                }
+            }
+        });
+    }
+    catch (err) {
+        res.send("Error Occured!");
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         console.log("Error Occured!");
     }
 });
 //
 router.post('/register', function (req, res) {
     var newUser = {
+<<<<<<< HEAD
         name: req.body.name,
         email: req.body.email,
         pass: req.body.pass
+=======
+        name: req.body.name
+        , email: req.body.email
+        , pass: req.body.pass
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
     };
     if (newUser.name && newUser.email && newUser.pass) {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
+<<<<<<< HEAD
             host: 'localhost',
             user: 'root',
             password: 'aakash',
             database: 'imdb2'
+=======
+            host: 'localhost'
+            , user: 'root'
+            , password: 'aakash'
+            , database: 'imdb2'
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
         });
         var createUser = 'INSERT INTO user(name,email,pass) VALUES("' + newUser.name + '","' + newUser.email + '","' + newUser.pass + '");';
         try {
@@ -97,6 +154,7 @@ router.post('/register', function (req, res) {
                 if (err) {
                     if (err.code === 'ER_DUP_ENTRY') {
                         msg = 'This email has already been registered!! Enter another email or Try logging in instead.';
+<<<<<<< HEAD
                         res.render('error', {
                             message: msg,
                             link: {
@@ -368,3 +426,23 @@ function add(mname) {
     return mname;
 }
 module.exports = router;
+=======
+                    }
+                }
+                else {
+                    msg = 'Successful User Insertion';
+                }
+                res.send(msg);
+            });
+        }
+        catch (err) {
+            res.send("Error Occured!");
+            console.log("Error Occured!");
+        }
+    }
+    else {
+        res.send("Enter credentials properly!!");
+    }
+});
+module.exports = router;
+>>>>>>> adbd77a0a69492833c98438a83a255556e2439ec
